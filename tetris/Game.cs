@@ -43,7 +43,6 @@ namespace tetris
                     CurrentBlockStatus = CurrentBlock.GetBlockCurrentStatus();
                     PutBlockInGrid();
                     PlayerInput();
-                    Thread.Sleep(100);
                     window.ShowPreviewWindow(5, 2, PreviewBlock);
                     window.ShowScore(5, 9, Score);
                     window.ShowMainWindow(5, 10);
