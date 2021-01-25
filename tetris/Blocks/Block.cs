@@ -1,14 +1,25 @@
 ﻿namespace tetris
 {
-    public abstract class Block
+    public class Block
     {
-        public int PosX { get; set; } = 4;
+        public int PosX { get; set; }
         public int PosY { get; set; }
-        protected bool[,] Rotation1 { get; set; }
-        protected bool[,] Rotation2 { get; set; }
-        protected bool[,] Rotation3 { get; set; }
-        protected bool[,] Rotation4 { get; set; }
-        protected bool[][,] BlockRotations { get; set; } = new bool[4][,];
+        public int BlockNr { get; }
+
+        //  protected bool[][,] BlockRotations { get; set; } = new bool[4][,];
+        protected ArrayOfBlocks Blocks { get; set; } = new ArrayOfBlocks();
+
+        //public Block()
+        //{
+        //    blocks.CreateBlockArray();
+
+        //}
+
+        public Block(int blockNr)
+        {
+            BlockNr = blockNr;
+            Blocks.CreateBlockArray(blockNr);
+        }
 
         private int _rotationIndex;
 
@@ -17,22 +28,13 @@
             get { return _rotationIndex; }
             set
             {
-                _rotationIndex = value;
-
-                if (_rotationIndex < 0)
-                {
-                    _rotationIndex = 3;
-                }
-                if (_rotationIndex > 3)
-                {
-                    _rotationIndex = 0;
-                }
+                _rotationIndex = value % 4;
             }
         }
 
         public void Turn()
         {
-            RotationIndex--;
+            RotationIndex += 3;
         }
 
         public void UndoTurn()
@@ -62,7 +64,8 @@
 
         public bool[,] GetBlockCurrentStatus()
         {
-            return BlockRotations[RotationIndex];
+            return Blocks.Blocks[BlockNr, RotationIndex];
+            //return BlockRotations[RotationIndex];
         }
     }
 }

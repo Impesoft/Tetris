@@ -44,7 +44,6 @@ namespace tetris
                     PutBlockInGrid();
                     PlayerInput();
                     Thread.Sleep(100);
-                    // Console.Clear();
                     window.ShowPreviewWindow(5, 2, PreviewBlock);
                     window.ShowScore(5, 9, Score);
                     window.ShowMainWindow(5, 10);
@@ -145,25 +144,27 @@ namespace tetris
         public void CreateRandomBlock()
         {
             Random rnd = new Random();
-            int blockNr = rnd.Next(1, 3);
+            int blockNr = rnd.Next(6);
+            PreviewBlock = new Block(blockNr);
+            NewBlock = false;
 
-            switch (blockNr)
-            {
-                case 1:
-                    BlockL blockL = new BlockL();
-                    PreviewBlock = blockL;
-                    NewBlock = false;
-                    break;
+            //switch (blockNr)
+            //{
+            //    case 0:
+            //        BlockL blockL = new BlockL();
+            //        PreviewBlock = blockL;
+            //        NewBlock = false;
+            //        break;
 
-                case 2:
-                    BlockLong blockLong = new BlockLong();
-                    PreviewBlock = blockLong;
-                    NewBlock = false;
-                    break;
+            //    case 1:
+            //        BlockLong blockLong = new BlockLong();
+            //        PreviewBlock = blockLong;
+            //        NewBlock = false;
+            //        break;
 
-                default:
-                    break;
-            }
+            //    default:
+            //        break;
+            //}
         }
 
         public void PutBlockInGrid()
