@@ -218,7 +218,6 @@ namespace tetris
                         PutBlockInGrid();
                         window.UpdateStaticGrid();
                         NewBlock = true;
-                        //createnewblock
 
                         break;
 

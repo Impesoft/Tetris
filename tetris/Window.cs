@@ -32,8 +32,8 @@ namespace tetris
         public void ShowMainWindow(int originX, int originY)
         {
             Console.OutputEncoding = System.Text.Encoding.Unicode;
-            string block = "\u2585";
-            //string block = "\u2588";
+            // string block = "\u2585";
+            string block = "\u2588";
 
             for (int i = 0; i < Height; i++)
             {
@@ -57,7 +57,7 @@ namespace tetris
         public void ShowPreviewWindow(int originX, int originY, Block prevBlock)
         {
             Console.OutputEncoding = System.Text.Encoding.Unicode;
-            string block = "\u2585";
+            string block = "\u2588"; //2585
 
             bool[,] previewBlock = prevBlock.GetBlockCurrentStatus();
 
