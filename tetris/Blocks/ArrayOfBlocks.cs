@@ -92,11 +92,11 @@
             {
                 bool[,] ret = new bool[4, 4];
 
-                for (int i = 0; i <= 3; ++i)
+                for (int i = 0; i < 4; ++i)
                 {
-                    for (int j = 0; j <= 3; ++j)
+                    for (int j = 0; j < 4; ++j)
                     {
-                        ret[i, j] = matrix[j, i];
+                        ret[i, j] = matrix[3 - j, i];
                     }
                 }
                 matrix = ret;
