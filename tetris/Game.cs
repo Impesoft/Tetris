@@ -44,7 +44,7 @@ namespace tetris
                     PutBlockInGrid();
                     PlayerInput();
                     Thread.Sleep(100);
-                    Console.Clear();
+                    // Console.Clear();
                     window.ShowPreviewWindow(5, 2, PreviewBlock);
                     window.ShowScore(5, 9, Score);
                     window.ShowMainWindow(5, 10);
