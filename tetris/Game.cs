@@ -13,6 +13,7 @@ namespace tetris
         private Block PreviewBlock { get; set; }
         public bool NewBlock { get; set; } = true;
         public int Score { get; set; }
+        public bool GameOver { get; set; }
 
         public Game()
         {
@@ -31,9 +32,8 @@ namespace tetris
             levelSpeed.Start();
 
             window.SetFrameAroundGrid();
-            bool running = true;
 
-            while (running)
+            while (!GameOver)
             {
                 CurrentBlock = PreviewBlock;
                 CreateRandomBlock();
@@ -51,6 +51,22 @@ namespace tetris
                     window.RefreshGrid();
                 }
                 CheckLineWasMade();
+                CheckGameOver();
+            }
+            Console.Clear();
+            Console.WriteLine("GAME OVER");
+            Console.ReadLine();
+            Environment.Exit(0);
+        }
+
+        private void CheckGameOver()
+        {
+            for (int i = 1; i < window.Width - 1; i++)
+            {
+                if (window.GridStatic[1, i])
+                {
+                    GameOver = true;
+                }
             }
         }
 
