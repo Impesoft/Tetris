@@ -16,24 +16,24 @@
                 {0,1,0,0} };
             arrayOfBlocks[1] = new int[,] {
                 {0,0,0,0 },
-                {0,0,0,0},
                 {0,1,1,0},
-                {0,1,1,0} };
-            arrayOfBlocks[2] = new int[,] {
-                {0,1,0,0},
-                {0,1,0,0},
                 {0,1,1,0},
                 {0,0,0,0} };
+            arrayOfBlocks[2] = new int[,] {
+                {0,0,0,0},
+                {0,1,0,0},
+                {0,1,0,0},
+                {0,1,1,0} };
             arrayOfBlocks[3] = new int[,] {
-                {0,0,1,0},
-                {0,0,1,0},
-                {0,1,1,0},
-                {0,0,0,0}};
-            arrayOfBlocks[4] = new int[,] {
                 {0,0,0,0},
                 {0,0,1,0},
-                {0,1,1,1},
-                {0,0,0,0}};
+                {0,0,1,0},
+                {0,1,1,0}};
+            arrayOfBlocks[4] = new int[,] {
+                {0,0,0,0},
+                {0,0,0,0},
+                {0,0,1,0},
+                {0,1,1,1}};
             arrayOfBlocks[5] = new int[,] {
                 {0,0,0,0},
                 {0,0,1,0},
@@ -54,24 +54,25 @@
             foreach (int[,] block in arrayOfBlocks)
             {
                 bool[,] boolBlock = ConvertToBool(block);
-                for (int i = 0; i < rotationsteps; i++)
-                {
-                    Blocks[blocknummer, i] = RotateMatrix(boolBlock, i + 1);
-                }
+
+                Blocks[blocknummer, 0] = boolBlock;
+                Blocks[blocknummer, 1] = RotateMatrix(boolBlock, 1);
+                Blocks[blocknummer, 2] = RotateMatrix(boolBlock, 2);
+                Blocks[blocknummer, 3] = RotateMatrix(boolBlock, 3);
                 blocknummer++;
             }
             return Blocks[blocknr, 0];
         }
 
-        private bool[,] ConvertToBool(int[,] line)
+        private bool[,] ConvertToBool(int[,] block)
         {
             bool[,] ret = new bool[4, 4];
 
-            for (int i = 0; i < 3; ++i)
+            for (int i = 0; i <= 3; ++i)
             {
-                for (int j = 0; j < 3; ++j)
+                for (int j = 0; j <= 3; ++j)
                 {
-                    if (line[i, j] == 1)
+                    if (block[i, j] == 1)
                     {
                         ret[i, j] = true;
                     }
@@ -87,12 +88,13 @@
 
         private bool[,] RotateMatrix(bool[,] matrix, int numberOfRotations)
         {
-            bool[,] ret = new bool[4, 4];
             for (int rotation = 0; rotation < numberOfRotations; rotation++)
             {
-                for (int i = 0; i < 3; ++i)
+                bool[,] ret = new bool[4, 4];
+
+                for (int i = 0; i <= 3; ++i)
                 {
-                    for (int j = 0; j < 3; ++j)
+                    for (int j = 0; j <= 3; ++j)
                     {
                         ret[i, j] = matrix[j, i];
                     }

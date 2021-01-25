@@ -147,24 +147,6 @@ namespace tetris
             int blockNr = rnd.Next(6);
             PreviewBlock = new Block(blockNr);
             NewBlock = false;
-
-            //switch (blockNr)
-            //{
-            //    case 0:
-            //        BlockL blockL = new BlockL();
-            //        PreviewBlock = blockL;
-            //        NewBlock = false;
-            //        break;
-
-            //    case 1:
-            //        BlockLong blockLong = new BlockLong();
-            //        PreviewBlock = blockLong;
-            //        NewBlock = false;
-            //        break;
-
-            //    default:
-            //        break;
-            //}
         }
 
         public void PutBlockInGrid()
