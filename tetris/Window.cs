@@ -40,18 +40,23 @@ namespace tetris
                 Console.SetCursorPosition(originX, originY);
                 for (int j = 0; j < Width; j++)
                 {
-                    if (Grid[i, j])
-                    {
-                        Console.Write(block);
-                    }
-                    else
-                    {
-                        Console.Write(" ");
-                    }
+                    DrawGridBlock(block, i, j);
                 }
                 originY++;
             }
             Console.CursorVisible = false;
+        }
+
+        private void DrawGridBlock(string block, int i, int j)
+        {
+            if (Grid[i, j])
+            {
+                Console.Write(block);
+            }
+            else
+            {
+                Console.Write(" ");
+            }
         }
 
         public void ShowPreviewWindow(int originX, int originY, Block prevBlock)
