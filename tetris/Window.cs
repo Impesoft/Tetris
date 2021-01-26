@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace tetris
 {
@@ -56,50 +54,14 @@ namespace tetris
                     Console.Write(" ");
                     break;
 
-                case 1:
-                    Console.ForegroundColor = ConsoleColor.DarkGray;
-                    Console.Write(block);
-                    Console.ResetColor();
-                    break;
-
                 case 2:
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.Write(block);
-                    Console.ResetColor();
-                    break;
-
                 case 3:
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.Write(block);
-                    Console.ResetColor();
-                    break;
-
                 case 4:
-                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                    Console.Write(block);
-                    Console.ResetColor();
-                    break;
-
                 case 5:
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.Write(block);
-                    Console.ResetColor();
-                    break;
-
                 case 6:
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.Write(block);
-                    Console.ResetColor();
-                    break;
-
                 case 7:
-                    Console.ForegroundColor = ConsoleColor.Magenta;
-                    Console.Write(block);
-                    Console.ResetColor();
-                    break;
-
                 case 8:
-                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = colors.Colors[kleur - 2];
                     Console.Write(block);
                     Console.ResetColor();
                     break;
@@ -108,14 +70,6 @@ namespace tetris
                     Console.Write(block);
                     break;
             }
-            //if (Grid[i, j] > 0)
-            //{
-            //    Console.Write(block);
-            //}
-            //else
-            //{
-            //    Console.Write(" ");
-            //}
         }
 
         public void ShowPreviewWindow(int originX, int originY, Block prevBlock)
