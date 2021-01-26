@@ -9,12 +9,14 @@ namespace tetris
         public int[,] PreviewGrid { get; set; }
         public int Height { get; }
         public int Width { get; }
+        private const int pGridWidth = 12;
+        private const int pGridHeight = 7;
 
-        public Window(int height, int width)
+        public Window(int width, int height)
         {
-            Grid = new int[height, width];
-            GridStatic = new int[height, width];
-            PreviewGrid = new int[7, 12];
+            Grid = new int[width, height];
+            GridStatic = new int[width, height];
+            PreviewGrid = new int[pGridWidth, pGridHeight];
             Height = height;
             Width = width;
         }
@@ -33,21 +35,21 @@ namespace tetris
             // string block = "\u2585";
             string block = "\u2588";
 
-            for (int i = 0; i < Height; i++)
+            for (int y = 0; y < Height; y++)
             {
                 Console.SetCursorPosition(originX, originY);
-                for (int j = 0; j < Width; j++)
+                for (int x = 0; x < Width; x++)
                 {
-                    DrawGridBlock(block, i, j);
+                    DrawGridBlock(block, x, y);
                 }
                 originY++;
             }
             Console.CursorVisible = false;
         }
 
-        private void DrawGridBlock(string block, int i, int j)
+        private void DrawGridBlock(string block, int x, int y)
         {
-            int kleur = Grid[i, j];
+            int kleur = Grid[x, y];
             switch (kleur)
             {
                 case 0:
@@ -79,20 +81,20 @@ namespace tetris
 
             int[,] previewBlock = prevBlock.GetBlockCurrentStatus();
 
-            for (int i = 0; i < 4; i++)
+            for (int y = 0; y < 4; y++)
             {
-                for (int j = 0; j < 4; j++)
+                for (int x = 0; x < 4; x++)
                 {
-                    PreviewGrid[i + 1, j + 4] = previewBlock[i, j];
+                    PreviewGrid[x + 4, y + 1] = previewBlock[x, y];
                 }
             }
 
-            for (int i = 0; i < 7; i++)
+            for (int y = 0; y < pGridHeight; y++)
             {
                 Console.SetCursorPosition(originX, originY);
-                for (int j = 0; j < 12; j++)
+                for (int x = 0; x < pGridWidth; x++)
                 {
-                    if (PreviewGrid[i, j] > 0)
+                    if (PreviewGrid[x, y] > 0)
                     {
                         Console.Write(block);
                     }
@@ -108,37 +110,37 @@ namespace tetris
 
         public void ClearPreviewWindow()
         {
-            for (int i = 0; i < 12; i++)
+            for (int x = 0; x < pGridWidth; x++)
             {
-                PreviewGrid[0, i] = 1;
+                PreviewGrid[x, 0] = 1;
             }
-            for (int i = 1; i < 7 - 1; i++)
+            for (int y = 1; y < pGridHeight - 1; y++)
             {
-                PreviewGrid[i, 0] = 1;
-                PreviewGrid[i, 11] = 1;
+                PreviewGrid[0, y] = 1;
+                PreviewGrid[11, y] = 1;
             }
 
-            for (int i = 0; i < 12; i++)
+            for (int x = 0; x < pGridWidth; x++)
             {
-                PreviewGrid[6, i] = 1;
+                PreviewGrid[x, 6] = 1;
             }
         }
 
         public void SetFrameAroundGrid()
         {
-            for (int i = 0; i < Width; i++)
+            for (int x = 0; x < Width; x++)
             {
-                GridStatic[0, i] = 1;
+                GridStatic[x, 0] = 1;
             }
-            for (int i = 1; i < Height - 1; i++)
+            for (int y = 1; y < Height - 1; y++)
             {
-                GridStatic[i, 0] = 1;
-                GridStatic[i, Width - 1] = 1;
+                GridStatic[0, y] = 1;
+                GridStatic[Width - 1, y] = 1;
             }
 
-            for (int i = 0; i < Width; i++)
+            for (int x = 0; x < Width; x++)
             {
-                GridStatic[Height - 1, i] = 1;
+                GridStatic[x, Height - 1] = 1;
             }
         }
 

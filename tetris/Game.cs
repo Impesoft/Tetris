@@ -17,7 +17,7 @@ namespace tetris
 
         public Game()
         {
-            window = new Window(22, 12);
+            window = new Window(12, 22);
         }
 
         public void RunGame()
@@ -68,9 +68,9 @@ namespace tetris
 
         private void CheckGameOver()
         {
-            for (int i = 1; i < window.Width - 1; i++)
+            for (int x = 1; x < window.Width - 1; x++)
             {
-                if (window.GridStatic[1, i] > 0)
+                if (window.GridStatic[x, 1] > 0)
                 {
                     GameOver = true;
                 }
@@ -83,13 +83,13 @@ namespace tetris
 
             List<int[]> linelist = new List<int[]>();
 
-            for (int i = 0; i < window.Height; i++)
+            for (int y = 0; y < window.Height; y++)
             {
                 int[] line = new int[window.Width];
 
-                for (int j = 0; j < window.Width; j++)
+                for (int x = 0; x < window.Width; x++)
                 {
-                    line[j] = window.GridStatic[i, j];
+                    line[x] = window.GridStatic[x, y];
                 }
                 linelist.Add(line);
             }
@@ -102,9 +102,9 @@ namespace tetris
             {
                 int counter = 0;
 
-                for (int i = 0; i < window.Width; i++)
+                for (int x = 0; x < window.Width; x++)
                 {
-                    if (line[i] > 0)
+                    if (line[x] > 0)
                     {
                         counter++;
                     }
@@ -125,9 +125,9 @@ namespace tetris
 
             foreach (var line in linelist)
             {
-                for (int i = 0; i < window.Width; i++)
+                for (int x = 0; x < window.Width; x++)
                 {
-                    window.Grid[listIndex, i] = line[i];
+                    window.Grid[x, listIndex] = line[x];
                 }
                 listIndex++;
             }
@@ -142,9 +142,9 @@ namespace tetris
             emptyLine[0] = 1;
             emptyLine[window.Width - 1] = 1;
 
-            for (int i = 1; i < window.Width - 1; i++)
+            for (int x = 1; x < window.Width - 1; x++)
             {
-                emptyLine[i] = 0;
+                emptyLine[x] = 0;
             }
             return emptyLine;
         }
@@ -159,13 +159,13 @@ namespace tetris
 
         public void PutBlockInGrid()
         {
-            for (int i = 0; i < 4; i++)
+            for (int y = 0; y < 4; y++)
             {
-                for (int j = 0; j < 4; j++)
+                for (int x = 0; x < 4; x++)
                 {
-                    if (CurrentBlockStatus[i, j] > 0)
+                    if (CurrentBlockStatus[x, y] > 0)
                     {
-                        window.Grid[i + CurrentBlock.PosY, j + CurrentBlock.PosX] = CurrentBlockStatus[i, j];
+                        window.Grid[x + CurrentBlock.PosX, y + CurrentBlock.PosY] = CurrentBlockStatus[x, y];
                     }
                 }
             }
@@ -238,11 +238,11 @@ namespace tetris
 
         public bool HitSomething()
         {
-            for (int i = 0; i < 4; i++)
+            for (int x = 0; x < 4; x++)
             {
-                for (int j = 0; j < 4; j++)
+                for (int y = 0; y < 4; y++)
                 {
-                    if (CurrentBlockStatus[i, j] > 0 && (window.GridStatic[i + CurrentBlock.PosY, j + CurrentBlock.PosX]) > 0)
+                    if (CurrentBlockStatus[x, y] > 0 && (window.GridStatic[x + CurrentBlock.PosX, y + CurrentBlock.PosY]) > 0)
                     {
                         return true;
                     }
@@ -264,7 +264,7 @@ namespace tetris
                     window.UpdateStaticGrid();
                     NewBlock = true;
                 }
-                Thread.Sleep(1000);
+                Thread.Sleep(1000 - Score / 10);
             }
         }
     }

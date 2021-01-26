@@ -68,11 +68,11 @@
             {
                 int[,] ret = new int[4, 4];
 
-                for (int i = 0; i < 4; ++i)
+                for (int x = 0; x < 4; ++x)
                 {
-                    for (int j = 0; j < 4; ++j)
+                    for (int y = 0; y < 4; ++y)
                     {
-                        ret[i, j] = matrix[3 - j, i];
+                        ret[x, y] = matrix[3 - y, x]; //
                     }
                 }
                 matrix = ret;
