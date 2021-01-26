@@ -6,17 +6,17 @@ namespace tetris
 {
     internal class Window
     {
-        public bool[,] Grid { get; set; }
-        public bool[,] GridStatic { get; set; }
-        public bool[,] PreviewGrid { get; set; }
+        public int[,] Grid { get; set; }
+        public int[,] GridStatic { get; set; }
+        public int[,] PreviewGrid { get; set; }
         public int Height { get; }
         public int Width { get; }
 
         public Window(int height, int width)
         {
-            Grid = new bool[height, width];
-            GridStatic = new bool[height, width];
-            PreviewGrid = new bool[7, 12];
+            Grid = new int[height, width];
+            GridStatic = new int[height, width];
+            PreviewGrid = new int[7, 12];
             Height = height;
             Width = width;
         }
@@ -49,14 +49,73 @@ namespace tetris
 
         private void DrawGridBlock(string block, int i, int j)
         {
-            if (Grid[i, j])
+            int kleur = Grid[i, j];
+            switch (kleur)
             {
-                Console.Write(block);
+                case 0:
+                    Console.Write(" ");
+                    break;
+
+                case 1:
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.Write(block);
+                    Console.ResetColor();
+                    break;
+
+                case 2:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write(block);
+                    Console.ResetColor();
+                    break;
+
+                case 3:
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write(block);
+                    Console.ResetColor();
+                    break;
+
+                case 4:
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                    Console.Write(block);
+                    Console.ResetColor();
+                    break;
+
+                case 5:
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write(block);
+                    Console.ResetColor();
+                    break;
+
+                case 6:
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write(block);
+                    Console.ResetColor();
+                    break;
+
+                case 7:
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.Write(block);
+                    Console.ResetColor();
+                    break;
+
+                case 8:
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write(block);
+                    Console.ResetColor();
+                    break;
+
+                default:
+                    Console.Write(block);
+                    break;
             }
-            else
-            {
-                Console.Write(" ");
-            }
+            //if (Grid[i, j] > 0)
+            //{
+            //    Console.Write(block);
+            //}
+            //else
+            //{
+            //    Console.Write(" ");
+            //}
         }
 
         public void ShowPreviewWindow(int originX, int originY, Block prevBlock)
@@ -64,7 +123,7 @@ namespace tetris
             Console.OutputEncoding = System.Text.Encoding.Unicode;
             string block = "\u2588"; //2585
 
-            bool[,] previewBlock = prevBlock.GetBlockCurrentStatus();
+            int[,] previewBlock = prevBlock.GetBlockCurrentStatus();
 
             for (int i = 0; i < 4; i++)
             {
@@ -79,7 +138,7 @@ namespace tetris
                 Console.SetCursorPosition(originX, originY);
                 for (int j = 0; j < 12; j++)
                 {
-                    if (PreviewGrid[i, j])
+                    if (PreviewGrid[i, j] > 0)
                     {
                         Console.Write(block);
                     }
@@ -97,17 +156,17 @@ namespace tetris
         {
             for (int i = 0; i < 12; i++)
             {
-                PreviewGrid[0, i] = true;
+                PreviewGrid[0, i] = 1;
             }
             for (int i = 1; i < 7 - 1; i++)
             {
-                PreviewGrid[i, 0] = true;
-                PreviewGrid[i, 11] = true;
+                PreviewGrid[i, 0] = 1;
+                PreviewGrid[i, 11] = 1;
             }
 
             for (int i = 0; i < 12; i++)
             {
-                PreviewGrid[6, i] = true;
+                PreviewGrid[6, i] = 1;
             }
         }
 
@@ -115,28 +174,28 @@ namespace tetris
         {
             for (int i = 0; i < Width; i++)
             {
-                GridStatic[0, i] = true;
+                GridStatic[0, i] = 1;
             }
             for (int i = 1; i < Height - 1; i++)
             {
-                GridStatic[i, 0] = true;
-                GridStatic[i, Width - 1] = true;
+                GridStatic[i, 0] = 1;
+                GridStatic[i, Width - 1] = 1;
             }
 
             for (int i = 0; i < Width; i++)
             {
-                GridStatic[Height - 1, i] = true;
+                GridStatic[Height - 1, i] = 1;
             }
         }
 
         public void RefreshGrid()
         {
-            Grid = (bool[,])GridStatic.Clone();
+            Grid = (int[,])GridStatic.Clone();
         }
 
         public void UpdateStaticGrid()
         {
-            GridStatic = (bool[,])Grid.Clone();
+            GridStatic = (int[,])Grid.Clone();
         }
     }
 }

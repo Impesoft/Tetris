@@ -8,7 +8,7 @@ namespace tetris
     internal class Game
     {
         private Window window;
-        private bool[,] CurrentBlockStatus { get; set; }
+        private int[,] CurrentBlockStatus { get; set; }
         private Block CurrentBlock { get; set; }
         private Block PreviewBlock { get; set; }
         public bool NewBlock { get; set; } = true;
@@ -61,7 +61,7 @@ namespace tetris
         {
             for (int i = 1; i < window.Width - 1; i++)
             {
-                if (window.GridStatic[1, i])
+                if (window.GridStatic[1, i] > 0)
                 {
                     GameOver = true;
                 }
@@ -72,11 +72,11 @@ namespace tetris
         {
             //convert grid in list with lines
 
-            List<bool[]> linelist = new List<bool[]>();
+            List<int[]> linelist = new List<int[]>();
 
             for (int i = 0; i < window.Height; i++)
             {
-                bool[] line = new bool[window.Width];
+                int[] line = new int[window.Width];
 
                 for (int j = 0; j < window.Width; j++)
                 {
@@ -95,7 +95,7 @@ namespace tetris
 
                 for (int i = 0; i < window.Width; i++)
                 {
-                    if (line[i] == true)
+                    if (line[i] > 0)
                     {
                         counter++;
                     }
@@ -126,16 +126,16 @@ namespace tetris
             window.UpdateStaticGrid();
         }
 
-        private bool[] MakeEmptyLine()
+        private int[] MakeEmptyLine()
         {
-            bool[] emptyLine = new bool[window.Width];
+            int[] emptyLine = new int[window.Width];
 
-            emptyLine[0] = true;
-            emptyLine[window.Width - 1] = true;
+            emptyLine[0] = 1;
+            emptyLine[window.Width - 1] = 1;
 
             for (int i = 1; i < window.Width - 1; i++)
             {
-                emptyLine[i] = false;
+                emptyLine[i] = 0;
             }
             return emptyLine;
         }
@@ -154,7 +154,7 @@ namespace tetris
             {
                 for (int j = 0; j < 4; j++)
                 {
-                    if (CurrentBlockStatus[i, j])
+                    if (CurrentBlockStatus[i, j] > 0)
                     {
                         window.Grid[i + CurrentBlock.PosY, j + CurrentBlock.PosX] = CurrentBlockStatus[i, j];
                     }
@@ -233,7 +233,7 @@ namespace tetris
             {
                 for (int j = 0; j < 4; j++)
                 {
-                    if (CurrentBlockStatus[i, j] && window.GridStatic[i + CurrentBlock.PosY, j + CurrentBlock.PosX])
+                    if (CurrentBlockStatus[i, j] > 0 && (window.GridStatic[i + CurrentBlock.PosY, j + CurrentBlock.PosX]) > 0)
                     {
                         return true;
                     }

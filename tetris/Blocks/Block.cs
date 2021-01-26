@@ -6,7 +6,7 @@
         public int PosY { get; set; }
         public int BlockNr { get; }
 
-        //  protected bool[][,] BlockRotations { get; set; } = new bool[4][,];
+        //  protected int[][,] BlockRotations { get; set; } = new int[4][,];
         protected ArrayOfBlocks Blocks { get; set; } = new ArrayOfBlocks();
 
         //public Block()
@@ -62,7 +62,7 @@
             PosY--;
         }
 
-        public bool[,] GetBlockCurrentStatus()
+        public int[,] GetBlockCurrentStatus()
         {
             return Blocks.Blocks[BlockNr, RotationIndex];
             //return BlockRotations[RotationIndex];
