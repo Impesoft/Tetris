@@ -51,8 +51,17 @@ namespace tetris
                 CheckLineWasMade();
                 CheckGameOver();
             }
-            Console.Clear();
-            Console.WriteLine("GAME OVER");
+            char block = '\u2588';
+            string line = new string(block, 12);
+            string gameOver = block + "GAME  OVER" + block;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.SetCursorPosition(window.Width / 2 - 1, 10 + window.Height / 2 - 1);
+            Console.Write(line);
+            Console.SetCursorPosition(window.Width / 2 - 1, 10 + window.Height / 2);
+            Console.Write(gameOver);
+            Console.SetCursorPosition(window.Width / 2 - 1, 10 + window.Height / 2 + 1);
+            Console.Write(line);
+            Console.ResetColor();
             Console.ReadLine();
             Environment.Exit(0);
         }
