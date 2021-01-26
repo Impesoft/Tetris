@@ -53,8 +53,6 @@
             int blocknummer = 0;
             foreach (int[,] block in arrayOfBlocks)
             {
-                //  int[,] boolBlock = ConvertToBool(block);
-
                 Blocks[blocknummer, 0] = block;
                 Blocks[blocknummer, 1] = RotateMatrix(block, 1);
                 Blocks[blocknummer, 2] = RotateMatrix(block, 2);
@@ -62,29 +60,6 @@
                 blocknummer++;
             }
             return Blocks[blocknr, 0];
-        }
-
-        private int[,] ConvertToBool(int[,] block)
-        {
-            //int[,] ret = new int[4, 4];
-
-            //for (int i = 0; i <= 3; ++i)
-            //{
-            //    for (int j = 0; j <= 3; ++j)
-            //    {
-            //        if (block[i, j] == 1)
-            //        {
-            //            ret[i, j] = 1;
-            //        }
-            //        else
-            //        {
-            //            ret[i, j] = 0;
-            //        }
-            //    }
-            //}
-
-            //return ret;
-            return block;
         }
 
         private int[,] RotateMatrix(int[,] matrix, int numberOfRotations)
