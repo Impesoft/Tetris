@@ -152,7 +152,7 @@ namespace tetris
         public void CreateRandomBlock()
         {
             Random rnd = new Random();
-            int blockNr = rnd.Next(6);
+            int blockNr = rnd.Next(7);
             PreviewBlock = new Block(blockNr);
             NewBlock = false;
         }
