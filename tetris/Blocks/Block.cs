@@ -4,21 +4,25 @@
     {
         public int PosX
         {
-            get { return PosX; }
+            get { return posX; }
             set
             {
                 if (value > 0)
                 {
-                    PosX = value;
+                    posX = value;
                 }
                 else
                 {
-                    PosX = 0;
+                    posX = 0;
                 }
             }
         }
 
+        private int posX;
+
+        //private int posY;
         public int PosY { get; set; }
+
         public int BlockNr { get; }
 
         protected ArrayOfBlocks Blocks { get; set; } = new ArrayOfBlocks();
