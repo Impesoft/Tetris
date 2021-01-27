@@ -53,7 +53,7 @@ namespace tetris
             switch (kleur)
             {
                 case 0:
-                    Console.Write(" ");
+                    ClearPixel();
                     break;
 
                 case 2:
@@ -63,15 +63,25 @@ namespace tetris
                 case 6:
                 case 7:
                 case 8:
-                    Console.ForegroundColor = colors.Colors[kleur - 2];
-                    Console.Write(block);
-                    Console.ResetColor();
+                    DrawPixel(block, kleur);
                     break;
 
                 default:
-                    Console.Write(block);
+                    Console.Write(block); //unknown Color = default color
                     break;
             }
+        }
+
+        private static void DrawPixel(string block, int kleur)
+        {
+            Console.ForegroundColor = colors.Colors[kleur - 2];
+            Console.Write(block);
+            Console.ResetColor();
+        }
+
+        private static void ClearPixel()
+        {
+            Console.Write(" ");
         }
 
         public void ShowPreviewWindow(int originX, int originY, Block prevBlock)
@@ -81,6 +91,24 @@ namespace tetris
 
             int[,] previewBlock = prevBlock.GetBlockCurrentStatus();
 
+            ReadBlok(previewBlock);
+            originY = DrawBlock(originX, originY, block);
+        }
+
+        private int DrawBlock(int originX, int originY, string block)
+        {
+            for (int y = 0; y < pGridHeight; y++)
+            {
+                Console.SetCursorPosition(originX, originY);
+                DrawLine(block, y);
+                originY++;
+            }
+            Console.CursorVisible = false;
+            return originY;
+        }
+
+        private void ReadBlok(int[,] previewBlock)
+        {
             for (int y = 0; y < 4; y++)
             {
                 for (int x = 0; x < 4; x++)
@@ -88,24 +116,26 @@ namespace tetris
                     PreviewGrid[x + 4, y + 1] = previewBlock[x, y];
                 }
             }
+        }
 
-            for (int y = 0; y < pGridHeight; y++)
+        private void DrawLine(string block, int y)
+        {
+            for (int x = 0; x < pGridWidth; x++)
             {
-                Console.SetCursorPosition(originX, originY);
-                for (int x = 0; x < pGridWidth; x++)
-                {
-                    if (PreviewGrid[x, y] > 0)
-                    {
-                        Console.Write(block);
-                    }
-                    else
-                    {
-                        Console.Write(" ");
-                    }
-                }
-                originY++;
+                DrawPreviewPixel(block, y, x);
             }
-            Console.CursorVisible = false;
+        }
+
+        private void DrawPreviewPixel(string block, int y, int x)
+        {
+            if (PreviewGrid[x, y] > 0)
+            {
+                Console.Write(block);
+            }
+            else
+            {
+                Console.Write(" ");
+            }
         }
 
         public void ClearPreviewWindow()
@@ -117,12 +147,12 @@ namespace tetris
             for (int y = 1; y < pGridHeight - 1; y++)
             {
                 PreviewGrid[0, y] = 1;
-                PreviewGrid[11, y] = 1;
+                PreviewGrid[pGridWidth - 1, y] = 1;
             }
 
             for (int x = 0; x < pGridWidth; x++)
             {
-                PreviewGrid[x, 6] = 1;
+                PreviewGrid[x, pGridHeight - 1] = 1;
             }
         }
 
