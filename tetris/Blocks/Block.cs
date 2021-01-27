@@ -4,7 +4,7 @@
     {
         public int PosX
         {
-            get { return PosX }
+            get { return PosX; }
             set
             {
                 if (value > 0)
