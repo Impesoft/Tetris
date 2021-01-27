@@ -2,7 +2,22 @@
 {
     public class Block
     {
-        public int PosX { get; set; }
+        public int PosX
+        {
+            get { return PosX }
+            set
+            {
+                if (value > 0)
+                {
+                    PosX = value;
+                }
+                else
+                {
+                    PosX = 0;
+                }
+            }
+        }
+
         public int PosY { get; set; }
         public int BlockNr { get; }
 
