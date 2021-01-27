@@ -13,7 +13,7 @@
             BlockNr = blockNr;
             Blocks.CreateBlockArray(blockNr);
             PosX = 1;
-            PosY = 1;
+            PosY = 0;
         }
 
         private int _rotationIndex;

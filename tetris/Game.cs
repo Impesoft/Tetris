@@ -264,7 +264,7 @@ namespace tetris
                     window.UpdateStaticGrid();
                     NewBlock = true;
                 }
-                Thread.Sleep(1000 - Score / 10);
+                Thread.Sleep(1000 - Score % 1000);
             }
         }
     }
