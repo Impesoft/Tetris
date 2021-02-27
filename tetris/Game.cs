@@ -17,7 +17,7 @@ namespace tetris
 
         public Game()
         {
-            window = new Window(12, 22);
+            window = new Window(14, 22);
         }
 
         public void RunGame()

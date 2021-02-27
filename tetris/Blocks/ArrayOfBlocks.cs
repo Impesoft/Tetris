@@ -59,6 +59,8 @@
                 Blocks[blocknummer, 3] = RotateMatrix(block, 3);
                 blocknummer++;
             }
+
+            Blocks[0, 3] = Blocks[0, 1];
             return Blocks[blocknr, 0];
         }
 
